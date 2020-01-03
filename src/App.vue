@@ -1,60 +1,74 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+    <div>
+      <v-row>
+        <v-col cols="3" class="mt-12">
+          <v-card class="mx-auto" max-width="300">
+            <v-img
+              src="../src/assets/images.jpg"
+              aspect-ratio="1"
+              class="grey lighten-2"
+              max-width="500"
+              max-height="500">
+            </v-img>
+            <v-list>
+              <v-list-item-group>
+                <v-list-item v-for="(item, i) in items" :key="i">
+                  <v-list-item-icon>
+                    <v-icon v-text="item.icon"></v-icon>
+                  </v-list-item-icon>
+                  <router-link :to="item.route" id="routerlink" class="black--text">
+                    <v-list-item-content :to="item.route">
+                      <v-list-item-title v-text="item.text"></v-list-item-title>
+                    </v-list-item-content>
+                  </router-link>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </v-col>
+        <v-col cols="9">
+          <v-content>
+            <router-view/>
+          </v-content>
+        </v-col>
+      </v-row>
+    </div>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+  export default {
+    name: 'App',
+    components: {
 
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+    },
+    data: () => ({
+      items: [
+        {
+          route: '/',
+          text: 'Home',
+          icon: 'mdi-home',
+        },
+        {
+          route: '/about',
+          text: 'About',
+          icon: 'mdi-account-circle',
+        },
+        {
+          route: '/resume',
+          text: 'Resume',
+          icon: 'mdi-account-card-details',
+        },
+      ],
+    }),
+  };
 </script>
+
+<style scoped>
+  #routerlink{
+    display: inline-block;
+    width: 300px;
+    text-decoration: none;
+  }
+</style>
