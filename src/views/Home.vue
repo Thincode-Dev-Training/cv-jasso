@@ -1,7 +1,18 @@
 <template>
-  <div class="home">
-    <p>home</p>
-  </div>
+  <v-app>
+    <div class="home">
+      <div class="text-center mt-12 mb-5 display-3">Jorge Jasso</div>
+      <v-carousel cycle height="350px" width="100px">
+        <v-carousel-item v-for="activity in activities" :key="activity">
+          <v-sheet color="blue-grey lighten-1" height="80%" >
+            <v-row class="fill-height" align="center" justify="center">
+              <div class="display-2">{{ activity }}</div>
+            </v-row>
+          </v-sheet>
+        </v-carousel-item>
+      </v-carousel>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -9,6 +20,9 @@
     name: 'home',
     components: {
 
-    }
+    },
+    data: () => ({
+      activities: ['Consultant', 'Analyst', 'Programmer', 'Tester'],
+    }),
   }
 </script>
